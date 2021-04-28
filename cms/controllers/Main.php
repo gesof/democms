@@ -9,21 +9,40 @@
 namespace cms\controllers;
 
 
-class Main
+class Main extends ParentController
 {
 
     public function index()
     {
-        include __DIR__ . "/../templates/index.html";
+        $content = "hello world";
+        $this->render("index.html", array(
+            'content' => $content
+        ));
     }
 
     public function aboutus()
     {
-        echo "aboutus";
+        $title = "About us";
+        $content = "This is my content";
+        $this->render("aboutus.html", array(
+            'title' => $title,
+            'content' => $content,
+        ));
+
     }
 
     public function contact()
     {
-        echo "contact";
+        $content = "hello world";
+        $this->render("contact.html", array(
+            'content' => $content
+        ));
     }
+
+    public function install()
+    {
+        $this->db->install();
+        $this->render("install.html", array());
+    }
+
 }

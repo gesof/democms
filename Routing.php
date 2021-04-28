@@ -12,6 +12,7 @@ class Routing
         '/' => ["cms\controllers\Main", "index"],
         '/aboutus' => ["cms\controllers\Main", "aboutus"],
         '/contact' => ["cms\controllers\Main", "contact"],
+        '/install' => ["cms\controllers\Main", "install"],
     );
 
     public function match()
