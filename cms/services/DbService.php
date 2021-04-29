@@ -50,13 +50,27 @@ class DbService
         }
     }
 
-    public function readPage($name)
+    public function readPage($slug)
     {
+        $ret = null;
+        $this->connect();
+        $sql = "SELECT * FROM page WHERE slug='$slug'";
+        $result = $this->conn->query($sql);
 
+        if ($result->num_rows > 0) {
+            // output data of each row
+            $ret = $result->fetch_assoc();
+        }
+        return $ret;
     }
 
-    public function savePage($name, $content)
+    public function savePage($slug, $name, $content)
     {
+        $this->connect();
+        $stmt = $this->conn->prepare("INSERT INTO page (`name`, slug, content) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $name, $slug, $content);
 
+        $stmt->execute();
+        return $this->conn->insert_id;
     }
 }

@@ -22,8 +22,9 @@ class Main extends ParentController
 
     public function aboutus()
     {
-        $title = "About us";
-        $content = "This is my content";
+        $row = $this->db->readPage('aboutus');
+        $title = $row['name'];
+        $content = $row['content'];
         $this->render("aboutus.html", array(
             'title' => $title,
             'content' => $content,
@@ -33,15 +34,23 @@ class Main extends ParentController
 
     public function contact()
     {
-        $content = "hello world";
+        $message = '';
+        if(isset($_POST['submit'])) {
+            $name = $_POST['yourname'];
+            $text = $_POST['comments'];
+            mail("iordachej@gmail.com", "Contact request", "From: " . $name . "\n\nComments:\n" . $text );
+            $message = "Message sent";
+        }
+
         $this->render("contact.html", array(
-            'content' => $content
+            'content' => $message
         ));
     }
 
     public function install()
     {
         $this->db->install();
+        $content = $this->db->savePage('aboutus', 'About us', 'This is our team');
         $this->render("install.html", array());
     }
 

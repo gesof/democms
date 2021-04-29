@@ -10,8 +10,21 @@
 <?php include "_nav.html" ?>
 <div class="container">
 
-    <H1>Hello!</H1>
-    continut din controller
+    <H1>Contact us</H1>
+    <?php echo $content;?>
+    <form name="contact" method="post">
+        <p>
+            <label for="yourname">Your name:</label>
+            <input type="text" name="yourname" id="yourname" />
+        </p>
+        <p>
+            <label for="comments">Comments:</label><br />
+            <textarea name="comments" id="comments" rows="10" cols="80"></textarea>
+        </p>
+        <p>
+            <input type="submit" name="submit" value="Send" class="btn btn-primary" />
+        </p>
+    </form>
 </div>
 <footer>
     <div class="container">
